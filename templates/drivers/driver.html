@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Vairuotojo ID: {{driver.id}}</p>
+    <!-- Bootstrap Table for Drivers -->
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Vardas, Pavardė</th>
+      <th scope="col">Darbuotojo numeris</th>
+      <th scope="col">Tel. Nr.</th>
+      <th scope="col">El. Paštas</th>
+      <th scope="col">Transporto numeris</th>
+      <th scope="col">Transporto tipas</th>
+      <th scope="col">Transporto statusas</th>
+    </tr>
+  </thead>
+  <tbody>
+          <tr>
+            <td>{{ driver.name }}</td>
+            <td>{{ driver.driver_number }}</td>
+            <td>{{ driver.phone_number }}</td>
+            <td>{{ driver.email }}</td>
+            <td>{{ driver.vehicle.plate_number }}</td>
+            <td>{{ driver.vehicle.type }}</td>
+            <td>{{ driver.vehicle.get_status_display }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

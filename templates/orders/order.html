@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Užsakymo ID: {{order.id}}</p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Užsakovas</th>
+            <th scope="col">Užsakymo data</th>
+            <th scope="col">Statusas</th>
+            <th scope="col">Produktas</th>
+            <th scope="col">Vieneto kaina</th>
+            <th scope="col">Kiekis</th>
+            <th scope="col">Bendra suma</th>
+            <th scope="col">Užsakymo kodas</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ order.customer}}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.get_status_display_value }}</td>
+            <td>{{ order.product.name }}</td>
+            <td>{{ order.product.unit_price }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.get_total_price }}</td>
+            <td>{{ order.order_code }}</td>
+        </tr>
+        </tbody>
+    </table>
+    </br>
+    <h4>Atsiliepimai:</h4>
+    {% if order.orderreview_set.all %}
+    {% for review in order.orderreview_set.all %}
+    <hr>
+    <strong>{{ review.reviewer }}</strong>, <em>{{ review.date_created}}</em>
+    <p>{{ review.content }}</p>
+    {% endfor %}
+    {% else %}
+    <p>Užsakymas neturi atsiliepimų</p>
+    {% endif %}
+    {% if user.is_authenticated %}
+    <div class="fieldWrapper">
+        <hr>
+        <br/>
+        <h4>Palikite atsiliepimą:</h4>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.content }}<br>
+            <input type="submit" value="Išsaugoti">
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Produkto ID: {{product.id}}</p>
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Pavadinimas</th>
+      <th scope="col">Vieneto kaina</th>
+    </tr>
+  </thead>
+  <tbody>
+          <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.unit_price }} €</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

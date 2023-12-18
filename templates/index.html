@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-3 rounded" style="background-color: #fff; padding: 15px;">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="border-right p-3 rounded text-center d-flex flex-column align-items-center justify-content-center">
+                <img src="{% static 'images/order_logo_2.png' %}" width="50" height="50" class="me-2 mb-2">
+                <div>
+                    <p class="mb-0"><strong>Užsakymų</strong></p>
+                </div>
+                <p style="font-size: 35px; margin-top: 10px;">{{ user_orders_count }}</p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="border-right p-3 rounded text-center d-flex flex-column align-items-start justify-content-center">
+                <div class="mb-2"> <!-- Pridėtas tarpo dydis (2 remelius) -->
+                    <img src="{% static 'images/order_logo_2.png' %}" width="50" height="50" class="me-2">
+                    <div>
+                        <p class="mb-0"><strong>Lankotės</strong></p>
+                    </div>
+                </div>
+                <p style="font-size: 35px; margin-top: 10px;">{{ num_visits }}</p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="border-right p-3 rounded text-center d-flex flex-column align-items-start justify-content-center">
+                <div class="mb-2"> <!-- Pridėtas tarpo dydis (2 remelius) -->
+                    <img src="{% static 'images/order_logo_2.png' %}" width="50" height="50" class="me-2">
+                    <div>
+                        <p class="mb-0"><strong>Bendrai įvykdytų užsakymų</strong></p>
+                    </div>
+                </div>
+                <p style="font-size: 35px; margin-top: 10px;">{{ orders_count }}</p>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="p-3 rounded text-center d-flex flex-column align-items-start justify-content-center">
+                <div class="mb-2">
+                    <img src="{% static 'images/order_logo_2.png' %}" width="50" height="50" class="me-2">
+                    <div>
+                        <p class="mb-0"><strong>Bendra užsakymų suma</strong></p>
+                    </div>
+                </div>
+                <p style="font-size: 35px; margin-top: 10px;">{{ total_sum }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

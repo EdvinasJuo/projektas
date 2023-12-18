@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+<div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Užsakymų sąrašas:</p>
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <form method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Užsakymo paieška" aria-label="Search" name="q" value="{{ request.GET.q }}">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Ieškoti</button>
+
+            <label class="ml-2">Rūšiuoti pagal:</label>
+            <select name="sort_by" class="form-control ml-2" onchange="this.form.submit()">
+                <option value="status" {% if sort_by == 'status' %}selected{% endif %}>Statusą</option>
+                <option value="order_date" {% if sort_by == 'order_date' %}selected{% endif %}>Užsakymo datą</option>
+                <!-- Add more options for other fields if needed -->
+            </select>
+        </form>
+
+        <p class="lead ml-2">Bendra užsakymų suma: {{ total_sum }}</p>
+    </div>
+
+    <div class="mt-3">
+        {% if user_orders %}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Užsakymo data</th>
+                <th scope="col">Statusas</th>
+                <th scope="col">Užsakymo kodas</th>
+                <th scope="col">Veiksmai</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for order in user_orders %}
+            <tr>
+                <th scope="row">{{ order.id }}</th>
+                <td>{{ order.order_date }}</td>
+                <td>
+                    <p class="{% if order.status == 'a' %}text-info
+            {% elif order.status == 'v' %}text-success
+            {% elif order.status == 'b' %}text-secondary
+            {% elif order.status == 'c' %}text-danger
+            {% endif %}">
+                        {{ order.get_status_display }}
+                    </p>
+                </td>
+                <td>{{ order.order_code }}</td>
+                <td>
+                    <a href="{% url 'order' order.id %}" class="btn btn-primary">Plačiau</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+
+        {% show_pagination_links user_orders %}
+        {% else %}
+        <p>Nerasta jokių rezultatų pagal paiešką.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

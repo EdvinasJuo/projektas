@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Transporto priemonės ID: {{vehicle.id}}</p>
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Transporto tipas</th>
+      <th scope="col">Gamintojas</th>
+      <th scope="col">Modelis</th>
+      <th scope="col">Metai</th>
+      <th scope="col">Valstybinis nr.</th>
+      <th scope="col">Statusas</th>
+    </tr>
+  </thead>
+  <tbody>
+          <tr>
+            <td>{{ vehicle.type }}</td>
+            <td>{{ vehicle.make }}</td>
+            <td>{{ vehicle.model }}</td>
+            <td>{{ vehicle.year }}</td>
+            <td>{{ vehicle.plate_number }}</td>
+            <td>{{ vehicle.get_status_display }}</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load custom_pagination %}
+
+{% block content %}
+  <div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Produktų sąrašas:</p>
+
+    <!-- Paieskos forma -->
+    <div class="d-flex justify-content-between">
+        <form method="get" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Produkto paieška" aria-label="Search"
+                   name="q"
+                   value="{{ request.GET.q }}">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Ieškoti</button>
+        </form>
+        {% if user.is_superuser %}
+        <a href="{% url 'product-new' %}?next=/library" class="btn btn-success mt-3">Naujas</a>
+        {% endif %}
+    </div>
+
+    <div class="mt-3"><!-- pridedamas tarpas -->
+      <!-- Bootstrapo table produktams -->
+      {% if all_products %}
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Produktas</th>
+            <th scope="col">Vieneto kaina</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in all_products %}
+            <tr>
+              <th scope="row">{{ product.id }}</th>
+              <td>{{ product.name }}</td>
+              <td>{{ product.unit_price }} €</td>
+              <td>
+                <a href="{% url 'product' product.id %}" class="btn btn-primary">Plačiau</a>
+                {% if user.is_superuser %}
+                    <a href="{% url 'product-update' product_id=product.id %}" class="btn btn-warning">Redaguoti</a>
+                    <a href="{% url 'product-delete' product_id=product.id %}" class="btn btn-danger">Ištrinti</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% show_pagination_links all_products %}
+      {% else %}
+        <p>Nerasta jokių rezultatų pagal paiešką.</p>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

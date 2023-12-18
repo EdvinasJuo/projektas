@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-3">
+    <h1 class="display-4">Logistikos app</h1>
+    <p class="lead">Sveiki atvykę į logistikos sistemą!</p>
+    <p class="lead">Sandėlio ID: {{warehouse.id}}</p>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Sandėlys</th>
+            <th scope="col">Lokacija</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ warehouse.name }}</td>
+            <td>{{ warehouse.location }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
