@@ -1,4 +1,6 @@
-# LogisticsApp - Tai yra logistikos sistemos projektas, sukurtas naudojant Django, kuris leidžia valdyti logistikos operacijas tokias kaip: užsakovų, vairuotojų, sandėlių, produktų, užsakymų, marštrutų, transporto priemonių pridėjimas, redagavimas ir ištrinimas. Šios funkcijos šiuo metu yra atvaizduojamos tik SuperAdmin, kuris gali sukurti užsakymą ir priskirti būtent konkrečiam vartotojui.
+# LogisticsApp 
+
+Tai yra logistikos sistemos projektas, sukurtas naudojant Django, kuris leidžia valdyti logistikos operacijas tokias kaip: užsakovų, vairuotojų, sandėlių, produktų, užsakymų, marštrutų, transporto priemonių pridėjimas, redagavimas ir ištrinimas. Šios funkcijos šiuo metu yra atvaizduojamos tik SuperAdmin, kuris gali sukurti užsakymą ir priskirti būtent konkrečiam vartotojui.
 
 # PROJEKTO STRUKTŪRA - 
 ├───.idea
